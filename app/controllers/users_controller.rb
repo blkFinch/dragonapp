@@ -10,11 +10,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @users = User.all 
     @user.permission = 1;
     if @user.save
+      flash[:success] = 'Welcome to Dragon Binder!'
       redirect_to @user
     else
-      render 'new'
+      redirect_to root_path 
+      flash[:error] = 'Failed to create account :<' 
     end
   end
 
