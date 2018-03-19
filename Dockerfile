@@ -26,6 +26,7 @@ RUN gem install bundler
  
 # Finish establishing our Ruby enviornment
 RUN bundle install
+
  
 # Copy the Rails application into place
 COPY . .
