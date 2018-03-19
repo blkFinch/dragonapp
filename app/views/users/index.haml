@@ -1,0 +1,9 @@
+.header
+  %h1 Users Index
+  %div#user_index
+    - @users.each do | user |
+      = user.screen_name
+      %i permision=
+      =user.permission
+      %br
+  
