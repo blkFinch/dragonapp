@@ -14,6 +14,8 @@
  *= require_self
  */
 
+@import "bootstrap"; 
+
 .header > h1{
   background-color: lightgrey;
   color: blue;
@@ -39,6 +41,7 @@
 #user_display{
   /*max-height: 245px;*/
   background-color: #C1EC96;
+  padding: 10px;
 }
 
 .wrapper > div:nth-child(odd){
@@ -47,3 +50,4 @@
   padding: 10px;
 
 }
+

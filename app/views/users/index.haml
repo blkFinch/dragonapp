@@ -1,9 +1,15 @@
 .header
   %h1 Users Index
   %div#user_index
-    - @users.each do | user |
-      = user.screen_name
-      %i permision=
-      =user.permission
-      %br
-  
+    %table
+      %tr
+        %th User
+        %th email
+        %th permission
+        %th
+      - @users.each do |user|
+        %tr
+          %td= link_to user.screen_name, user
+          %td= user.email
+          %td= user.permission
+          %td= link_to 'edit', edit_user_path(user)
