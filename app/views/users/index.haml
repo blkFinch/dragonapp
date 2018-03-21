@@ -1,7 +1,7 @@
 .header
   %h1 Users Index
-  %div#user_index
-    %table
+  %div
+    %table#user_index
       %tr
         %th User
         %th email
@@ -12,4 +12,4 @@
           %td= link_to user.screen_name, user
           %td= user.email
           %td= user.permission
-          %td= link_to 'edit', edit_user_path(user)
+          %td= link_to 'edit', edit_user_path(user) 

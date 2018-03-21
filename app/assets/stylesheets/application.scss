@@ -27,6 +27,12 @@
       grid-gap: 10px;
       grid-auto-rows: minmax(auto,auto);
     }
+.wrapper > div:nth-child(odd){
+  max-height: 245px;
+  background-color: #C1EC96;
+  padding: 10px;
+
+}
 #post_wrapper{
       background-color: #8F9297;
       padding: 10px;
@@ -44,10 +50,4 @@
   padding: 10px;
 }
 
-.wrapper > div:nth-child(odd){
-  max-height: 245px;
-  background-color: #C1EC96;
-  padding: 10px;
-
-}
 
