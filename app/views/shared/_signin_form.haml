@@ -1,0 +1,10 @@
+= form_for(:session, url: login_path) do | form |
+  = form.label :screen_name
+  = form.text_field :screen_name
+  %br/
+  %br/
+  = form.label :password
+  = form.password_field :password
+  %br/
+  %br/
+  = form.submit "Log In!"
