@@ -1,10 +1,12 @@
-= form_for(:session, url: login_path) do | form |
+= form_for(:session, url: login_path) do |form|
   = form.label :screen_name
   = form.text_field :screen_name
-  %br/
   %br/
   = form.label :password
   = form.password_field :password
   %br/
+  = form.submit "Log In", class: "btn btn-primary"
+%p
+  New User?
   %br/
-  = form.submit "Log In!"
+  = link_to "Sign Up!", new_user_path
