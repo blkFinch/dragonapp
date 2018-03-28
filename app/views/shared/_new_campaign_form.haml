@@ -1,0 +1,8 @@
+= form_for(@campaign) do |form| 
+  = form.label :title 
+  = form.text_field :title
+  %br/
+  = form.label :description
+  = form.text_area :description
+  %br/
+  = form.submit "Create!", class: "btn btn-primary"

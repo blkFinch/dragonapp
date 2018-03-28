@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   
   helper_method :is_admin?
 
+  def flash_error(x)
+    flash[:danger] = "Action Failed #{x.errors.full_messages}"
+  end
+
   private
 
     def logged_in_user
@@ -14,7 +18,11 @@ class ApplicationController < ActionController::Base
     end
 
     def is_admin?
-      current_user.permission == 3
+      if current_user
+        current_user.permission == 3
+      else
+        return false 
+      end
     end
 
     

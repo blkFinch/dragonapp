@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Welcome to Dragon Binder!'
       redirect_to @user
     else
-      flash[:danger] = "Failed to create account :< #{@user.errors.full_messages}" 
+      flash_error(@user)
       render action: "new"
     end
   end
