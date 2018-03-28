@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'campaigns/index'
+
+  get 'campaigns/show'
+
   get 'static_pages/home', to: "static_pages#home"
   
   get '/login', to: 'static_pages#index'

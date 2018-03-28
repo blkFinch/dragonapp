@@ -2,17 +2,23 @@
 %body
   .header
     %h1 Update User
-  .container
-    %div
-      = form_for(@user) do |f|
-        = f.label :email
-        = f.email_field :email
-        = f.label :password
-        = f.password_field :password
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation
-        - if is_admin?
-          = f.label :permission
-          =f.select :permission, [["user", 1],["super user", 2],["admin", 3]]
-        = f.submit "Save changes", class: "btn btn-primary"
+  .container-fluid
+    .row
+      .col-sm-3#user_display
+        %div{:align => "right" }
+          = form_for(@user) do |f|
+            = f.label :email
+            = f.email_field :email
+            %br/
+            = f.label :password
+            = f.password_field :password
+            %br/
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation
+            %br/
+            - if is_admin?
+              = f.label :permission
+              =f.select :permission, [["user", 1],["super user", 2],["admin", 3]]
+              %br/
+            = f.submit "Save changes", class: "btn btn-primary"
 
