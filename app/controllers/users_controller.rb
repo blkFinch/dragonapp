@@ -17,8 +17,8 @@ class UsersController < ApplicationController
       flash[:success] = 'Welcome to Dragon Binder!'
       redirect_to @user
     else
-      redirect_to root_path 
-      flash[:error] = 'Failed to create account :<' 
+      flash[:danger] = "Failed to create account :< #{@user.errors.full_messages}" 
+      render action: "new"
     end
   end
   
@@ -29,9 +29,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:sucess] = "Profile Updated!"
+      flash[:success] = "Profile Updated!"
       redirect_to @user
     else
+      flash[:danger] = "Failed to create account :< #{@user.errors.full_messages}" 
       render 'edit'
     end
   end
@@ -46,8 +47,13 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:screen_name, :password, :password_confirmation,
-                                    :permission)
+      allowed = [:screen_name, :password, :password_confirmation,
+                                    :email]
+
+      if is_admin?
+       allowed << :permission
+      end
+      params.require(:user).permit(allowed)
     end
   
 end

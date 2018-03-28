@@ -29,13 +29,20 @@
       grid-auto-rows: minmax(auto,auto);
     }
 .wrapper > div:nth-child(odd){
-  max-height: 245px;
   background-color: #C1EC96;
   padding: 10px;
 
 }
 .sign_up{
   margin: 5px;
+}
+.error{
+  color: white;
+  background-color: red;
+}
+.success{
+  color: white;
+  background-color: green;
 }
 
 // class
