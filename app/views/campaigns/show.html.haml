@@ -1,3 +1,8 @@
 .header
   %h1 
     =@campaign.title
+%div
+  %em USERS:
+  - @campaign.users.each do |user|
+    %p= user.screen_name
+  = render 'shared/add_player_form'

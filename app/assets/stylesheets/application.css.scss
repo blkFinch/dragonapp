@@ -16,10 +16,11 @@
 
 @import "bootstrap"; 
 
-// id 
+
 .header > h1{
-  color: #FFC857;
-  background-color: #694873;
+  background-color: #E2B6CF;
+  font-weight: bold;
+  color: #F6EFEE;
   padding: 5px;
 }
 
@@ -27,25 +28,27 @@
   margin: 5px;
 }
 
-// class
+#index_table{
+  margin:10px;
+}
 
 #user_display{
-  color: #2E4052;
-  background-color: #FFC857;
+  color: #8B728E;
+  background-color: #EEFCCE;
   padding: 10px;
   margin: 5px;
   margin-left: 10px;
 }
 
 .feed_item{
-  color: #2E4052;
+  color: #8B728E;
   background-color: #D4D2D5;
   padding: 5px;
   margin-bottom: 5px;
 }
 
 .feed_item a{
-  color: #8B728E;
+  color: #EEFCCE;
   font-weight: bold;
 }
 
