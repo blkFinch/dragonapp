@@ -8,14 +8,17 @@
     .container-fluid
       .row
         .col-sm-3#user_display
-          -if !logged_in?
+          -if logged_in?
+            %em you are logged in
+            =link_to "Log Out", logout_path, method: :delete
+      
+          -else
             %em a place to organize your campaign!
             .sign_up{ :align => "right" }
               = render 'shared/signin_form'
-          -else
-            %em you are logged in
-            =link_to "Log Out", logout_path, method: :delete
-           
+
+             
+
  
 	    	
 

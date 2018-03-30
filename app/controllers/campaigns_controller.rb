@@ -32,6 +32,8 @@ class CampaignsController < ApplicationController
 
   def update
     @campaign = Campaign.find(params[:id])
+    @user = User.find(params[:id])
+    
   end
 
   private 

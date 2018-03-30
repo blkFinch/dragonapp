@@ -1,2 +1,19 @@
-%p show user
-= @user.screen_name
+!!!
+%html
+  %head
+    %title Dragon Binder
+  %body
+    .header
+      %h1 Dragon Binder
+    .container-fluid
+      .row
+        .col-sm-3#user_display
+          %em you are logged in
+          =link_to "Log Out", logout_path, method: :delete
+              
+        -if @user.campaigns.any?
+          .col-sm-8
+            - @user.campaigns.each do |campaign|
+              .feed_item
+                = link_to campaign.title, campaign
+                %p= campaign.description
