@@ -35,9 +35,19 @@ class CampaignsController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def search_user
+    @campaign = Campaign.find(params[:id])
+    @users = User.search(params[:search])
+    respond_to do |format| 
+      format.js { render template: "users/search"}
+    end
+  end
+
   def add_user
     @campaign = Campaign.find(params[:id])
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    @campaign.organizers.create(user_id: @user.id)
   end
 
 

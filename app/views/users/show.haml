@@ -4,12 +4,14 @@
     %title Dragon Binder
   %body
     .header
-      %h1 Dragon Binder
+      %h1= @user.screen_name
     .container-fluid
       .row
         .col-sm-3#user_display
           %em you are logged in
           =link_to "Log Out", logout_path, method: :delete
+          %br/
+          =link_to "New Campaign?", url_for(controller:"campaigns", action: "new")
               
         -if @user.campaigns.any?
           .col-sm-8

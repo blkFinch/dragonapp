@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :show, :index]
 
   def index
-    @users = User.all 
+    @users = User.all
+    if params[:search]
+      @users = User.search(params[:search])
+    end
   end
 
   def new
@@ -42,11 +45,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @users = User.find(params[:id])
     @user.destroy
     redirect_to root_url
   end
 
+ 
 
   private
 

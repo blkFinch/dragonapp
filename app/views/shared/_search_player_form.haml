@@ -1,0 +1,6 @@
+= form_tag(search_user_campaign_path(@campaign), :method => "get", remote: true) do
+  = text_field_tag :search, params[:search], placeholder: "Search Users by Screen Name"
+  = submit_tag "Search", :name => nil
+
+.results
+

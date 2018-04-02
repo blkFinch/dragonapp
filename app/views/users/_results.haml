@@ -1,0 +1,8 @@
+
+- @users.each do |user|
+  %div{id:"user_#{user.id}"}
+    = user.screen_name
+
+    = form_tag(add_user_campaign_path(@campaign), :method => "patch", remote: true) do
+      = hidden_field_tag :user_id, user.id
+      = submit_tag "Add user", :name => nil

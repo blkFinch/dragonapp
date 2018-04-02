@@ -3,6 +3,8 @@
     =@campaign.title
 %div
   %em USERS:
-  - @campaign.users.each do |user|
-    %p= user.screen_name
-  = render 'shared/add_player_form'
+  .active_players
+    - @campaign.users.each do |user|
+      %p= user.screen_name
+  = render 'shared/search_player_form'
+

@@ -8,9 +8,16 @@ Rails.application.routes.draw do
 
 
 
-  resources :users
-
-  resources :campaigns
+  resources :users do 
+   
+  end
+    
+  resources :campaigns do 
+    member do
+      patch :add_user
+      get :search_user
+    end
+  end
 
   root "static_pages#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
