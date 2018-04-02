@@ -1,0 +1,13 @@
+.header
+  %h1
+    DM's Page //
+    =@campaign.title
+
+%div
+  %em USERS:
+  .active_players
+    - @campaign.users.each do |user|
+      =link_to user.screen_name, user_path(user) 
+      %br
+  = render 'shared/search_player_form'
+

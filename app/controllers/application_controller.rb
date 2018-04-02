@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   helper_method :is_admin?
+  helper_method :is_dm?
 
   def flash_error(x)
     flash[:danger] = "Action Failed #{x.errors.full_messages}"
@@ -25,5 +26,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    
+    def is_dm?(campaign_id)
+      current_user.organizers.owned.where(campaign_id: campaign_id ).any?
+    end
+
 end

@@ -1,10 +1,15 @@
 .header
   %h1 
     =@campaign.title
-%div
-  %em USERS:
-  .active_players
-    - @campaign.users.each do |user|
-      %p= user.screen_name
-  = render 'shared/search_player_form'
+.container-fluid
+  .row
+    .col-sm-3#user_display
+      %em USERS:
+      .active_players
+        - @campaign.users.each do |user|
+          =link_to user.screen_name, user_path(user) 
+          |
+      -if is_dm?(@campaign)
+        %br
+        =link_to 'DM Controls', edit_campaign_path(@campaign)
 

@@ -1,5 +1,6 @@
 class CampaignsController < ApplicationController
   before_action :logged_in_user
+  before_action  :is_owner, only:[:edit]
 
   def index 
   end
@@ -28,6 +29,7 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+    @campaign = Campaign.find(params[:id])
   end
 
   def update
@@ -54,6 +56,14 @@ class CampaignsController < ApplicationController
   private 
     def campaign_params
       params.require(:campaign).permit(:title, :description)
+    end
+
+    def is_owner
+      @campaign = Campaign.find(params[:id])
+      unless is_dm?(@campaign)
+        flash[:danger]="access denied"
+        redirect_to campaign_path(@campaign)
+      end
     end
 
 end
