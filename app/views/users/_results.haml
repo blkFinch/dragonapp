@@ -5,4 +5,4 @@
 
     = form_tag(add_user_campaign_path(@campaign), :method => "patch", remote: true) do
       = hidden_field_tag :user_id, user.id
-      = submit_tag "Add user", :name => nil
+      = submit_tag "Add user", class: "btn btn-primary", :name => nil

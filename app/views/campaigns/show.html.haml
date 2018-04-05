@@ -4,6 +4,8 @@
 .container-fluid
   .row
     .col-sm-3#user_display
+      %em= @campaign.description
+      %br
       %em USERS:
       .active_players
         - @campaign.users.each do |user|

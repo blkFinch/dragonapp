@@ -3,11 +3,16 @@
     DM's Page //
     =@campaign.title
 
-%div
-  %em USERS:
-  .active_players
-    - @campaign.users.each do |user|
-      =link_to user.screen_name, user_path(user) 
-      %br
-  = render 'shared/search_player_form'
+.container-fluid
+  .row
+    .col-sm-3#user_display
+      %em PLAYERS:
+      .active_players
+        - @campaign.users.each do |user|
+          =link_to user.screen_name, user_path(user) 
+          %br
+      %h5 ADD PLAYER
+      = render 'shared/search_player_form'
+    .col-sm-3.small_box
+      = render 'shared/edit_campaign_name'
 
