@@ -9,6 +9,16 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+    <header>
+      <%= link_to "Home", root_path %>
+      |
+      <%= link_to current_user.screen_name, current_user %>
+      |
+      <%= link_to 'Log Out', logout_path, method: :delete %>
+    </header>
+    <% end %>
+
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%=(message_type)%>">
         <%= message %>
