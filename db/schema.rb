@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406190147) do
+ActiveRecord::Schema.define(version: 20180406204022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,17 @@ ActiveRecord::Schema.define(version: 20180406190147) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "characters", force: :cascade do |t|
+  create_table "organizers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "campaign_id"
+    t.boolean "dm", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pcharacters", force: :cascade do |t|
     t.string "name"
-    t.integer "class"
+    t.integer "klass"
     t.integer "str"
     t.integer "dex"
     t.integer "con"
@@ -37,16 +45,10 @@ ActiveRecord::Schema.define(version: 20180406190147) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "campaign_id"
-  end
-
-  create_table "organizers", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "campaign_id"
-    t.boolean "dm", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "campaign_id"
+    t.index ["campaign_id"], name: "index_pcharacters_on_campaign_id"
+    t.index ["user_id"], name: "index_pcharacters_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -69,5 +71,7 @@ ActiveRecord::Schema.define(version: 20180406190147) do
     t.string "email"
   end
 
+  add_foreign_key "pcharacters", "campaigns"
+  add_foreign_key "pcharacters", "users"
   add_foreign_key "posts", "users"
 end

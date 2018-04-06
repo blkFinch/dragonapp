@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = Campaign.find(params[:id])
+    @character = Pcharacter.new 
   end
 
   def edit
@@ -58,6 +59,8 @@ class CampaignsController < ApplicationController
 
     @campaign.organizers.create(user_id: @user.id)
   end
+
+
 
 
   private 

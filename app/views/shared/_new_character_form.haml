@@ -1,0 +1,4 @@
+= form_with(model: [ @campaign, @campaign.pcharacters.build], local: true) do |form|
+  = form.label :name 
+  = form.text_field :name
+  = form.submit "Create!", class: "btn btn-primary"

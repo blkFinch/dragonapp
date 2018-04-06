@@ -1,6 +1,6 @@
 class CreateCharacters < ActiveRecord::Migration[5.1]
   def change
-    create_table :characters do |t|
+    create_table :pcharacters do |t|
       t.string :name
       t.integer :class
       t.integer :str

@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   has_many :organizers
   has_many :campaigns, :through => :organizers
+  has_many :pcharacters 
 
   validates :screen_name, presence: true, length: { maximum: 30 },
                           uniqueness: true
