@@ -1,5 +1,9 @@
 class PcharactersController < ApplicationController
 
+  def index
+    @campaign = Campaign.find(params[:campaign_id])
+    @characters = @campaign.pcharacters.all
+  end
 
   def create
     @campaign = Campaign.find(params[:campaign_id])
