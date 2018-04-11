@@ -5,10 +5,15 @@ class PcharactersController < ApplicationController
     @characters = @campaign.pcharacters.all
   end
 
+  def new
+    @campaign = Campaign.find(params[:campaign_id])
+  end
+
   def create
     @campaign = Campaign.find(params[:campaign_id])
     @user = current_user
     @character = @campaign.pcharacters.create(character_params.merge(user: @user))
+    @character.image = params[:pcharacter][:image]
     if @character.save 
       flash[:success]="chacter saved!"
       redirect_to campaign_path(@campaign)

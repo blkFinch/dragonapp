@@ -36,8 +36,11 @@ gem 'autoprefixer-rails'
 
 gem 'jquery-rails'
 
+#for file/image uploading
 gem 'paperclip'
 
+#for mailgun email app
+gem 'mailgun_rails'
 
 
 # Use Capistrano for deployment

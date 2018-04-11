@@ -5,12 +5,16 @@
 
 .container-fluid
   .row
-    .col-sm-3#user_display
-      %em PLAYERS:
-      .active_players
-        =render partial: 'campaigns/active_user', collection: @campaign.users, as: :user 
-      %h5 ADD PLAYER
-      = render 'shared/search_player_form'
-    .col-sm-3.small_box
-      = render 'shared/edit_campaign_name'
+    .col-sm-3
+      #user_display
+        %em PLAYERS:
+        .active_players
+          =render partial: 'campaigns/active_user', collection: @campaign.users, as: :user 
+        %h5 ADD PLAYER
+        = render 'shared/search_player_form'
+      .small_box
+        = render 'shared/edit_campaign_name'
+    .col-sm-6
+      .small_gray_box
+        =render partial: 'shared/email_form'
 

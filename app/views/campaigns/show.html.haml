@@ -3,26 +3,32 @@
     =@campaign.title
 .container-fluid
   .row
-    .col-sm-3#user_display
-      %em= @campaign.description
-      %br
-      %em USERS:
-      .active_players
-        - @campaign.users.each do |user|
-          =link_to user.screen_name, user_path(user) 
-          |
-      -if is_dm?(@campaign)
+    .col-sm-3
+      #user_display
+        %em= @campaign.description
         %br
-        =link_to 'DM Controls', edit_campaign_path(@campaign)
+        %em USERS:
+        .active_players
+          - @campaign.users.each do |user|
+            =link_to user.screen_name, user_path(user) 
+            |
+        -if is_dm?(@campaign)
+          %br
+          =link_to 'DM Controls', edit_campaign_path(@campaign)
+      
+      .small_box
+        =render 'shared/new_character_form'
+
     -if @campaign.pcharacters.any?
       .col-sm-8
         - @campaign.pcharacters.each do | character |
           .feed_item
             %h4= character.name
+            -if character.image
+              %img{:src => "#{character.image(:medium)}"}
+              %br 
             %em= character.user.screen_name
             = link_to 'delete', character, method: :delete
-  .row
-    .col-sm-3.small_box
-      =render 'shared/new_character_form'
+
     
 

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user.permission = 1;
     if @user.save
       flash[:success] = 'Welcome to Dragon Binder!'
+      DragonMailer.with(user: @user).welcome_email.deliver_now
       redirect_to @user
     else
       flash_error(@user)
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
     @user.destroy
     redirect_to root_url
   end

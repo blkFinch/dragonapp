@@ -1,4 +1,7 @@
-= form_with(model: [ @campaign, @campaign.pcharacters.build], local: true) do |form|
+= form_with(model: [ @campaign, Pcharacter.new ], local: true) do |form|
   = form.label :name 
   = form.text_field :name
+  %br
+  = form.label :image
+  = form.file_field :image, class: 'form-control'
   = form.submit "Create!", class: "btn btn-primary"
