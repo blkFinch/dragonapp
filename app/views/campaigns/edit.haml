@@ -8,9 +8,7 @@
     .col-sm-3#user_display
       %em PLAYERS:
       .active_players
-        - @campaign.users.each do |user|
-          =link_to user.screen_name, user_path(user) 
-          %br
+        =render partial: 'campaigns/active_user', collection: @campaign.users, as: :user 
       %h5 ADD PLAYER
       = render 'shared/search_player_form'
     .col-sm-3.small_box

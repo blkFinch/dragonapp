@@ -36,6 +36,8 @@ gem 'autoprefixer-rails'
 
 gem 'jquery-rails'
 
+gem 'paperclip'
+
 
 
 # Use Capistrano for deployment

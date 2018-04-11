@@ -60,6 +60,16 @@ class CampaignsController < ApplicationController
     @campaign.organizers.create(user_id: @user.id)
   end
 
+  def remove_user
+    @campaign = Campaign.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    @organizer = @campaign.organizers.where(:user_id => @user.id).first
+
+    @organizer.destroy
+
+    redirect_to edit_campaign_path(@campaign)
+  end
 
 
 

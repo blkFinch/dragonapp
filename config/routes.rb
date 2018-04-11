@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     member do
       patch :add_user
       get :search_user
+      patch :remove_user
     end
 
     resources :pcharacters 
