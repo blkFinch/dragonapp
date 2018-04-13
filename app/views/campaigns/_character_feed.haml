@@ -1,0 +1,9 @@
+.col-sm-8
+  - @campaign.pcharacters.each do | character |
+    .feed_item
+      %h4= character.name
+      -if character.image.present?
+        %img{:src => "#{character.image(:small)}"}
+      %em= character.user.screen_name
+      =link_to_character_controls(character)
+        

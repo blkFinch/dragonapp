@@ -13,4 +13,6 @@ RSpec.describe User, type: :model do
 
   it{ should have_many(:campaigns).through(:organizers)}
 
+  it{ should have_many(:pcharacters) }
+
 end

@@ -16,19 +16,10 @@
           %br
           =link_to 'DM Controls', edit_campaign_path(@campaign)
       
-      .small_box
-        =render 'shared/new_character_form'
+      =link_to_character_create(@campaign)
 
     -if @campaign.pcharacters.any?
-      .col-sm-8
-        - @campaign.pcharacters.each do | character |
-          .feed_item
-            %h4= character.name
-            -if character.image
-              %img{:src => "#{character.image(:medium)}"}
-              %br 
-            %em= character.user.screen_name
-            = link_to 'delete', character, method: :delete
+      =render partial: 'campaigns/character_feed'
 
     
 

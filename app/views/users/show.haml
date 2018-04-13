@@ -14,8 +14,4 @@
           =link_to "New Campaign?", url_for(controller:"campaigns", action: "new")
               
         -if @user.campaigns.any?
-          .col-sm-8
-            - @user.campaigns.each do |campaign|
-              .feed_item
-                = link_to campaign.title, campaign
-                %p= campaign.description
+          =render partial: 'users/user_feed'

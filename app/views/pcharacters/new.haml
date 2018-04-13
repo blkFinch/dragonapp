@@ -1,4 +1,9 @@
 .header
-%h1
-  Hello
-  =@campaign.title 
+  %h1
+    New Character
+
+.conatiner-fluid
+  .row
+    .col-sm-4
+      .small_box
+        =render partial: 'shared/new_character_form'

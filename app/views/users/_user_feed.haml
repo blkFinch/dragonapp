@@ -1,0 +1,7 @@
+.col-sm-8
+  - @user.campaigns.each do |campaign|
+    %div{:class => "#{is_dm?(campaign.id) ? 'feed_item_special':'feed_item'}"}
+      = link_to campaign.title, campaign
+      -if is_dm?(campaign.id)
+        %em= link_to '**DM Page**', edit_campaign_path(campaign)
+      %p= campaign.description

@@ -57,6 +57,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     @user = User.find(params[:user_id])
 
+    DragonMailer.with(user: @user, campaign: @campaign).welcome_to_campaign.deliver_now
+
     @campaign.organizers.create(user_id: @user.id)
   end
 

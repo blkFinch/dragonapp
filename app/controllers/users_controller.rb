@@ -23,7 +23,8 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'Welcome to Dragon Binder!'
       DragonMailer.with(user: @user).welcome_email.deliver_now
-      redirect_to @user
+      log_in @user 
+      redirect_to user_path(@user)
     else
       flash_error(@user)
       render action: "new"

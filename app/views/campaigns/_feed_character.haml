@@ -1,0 +1,5 @@
+%h4= character.name
+-if character.image.present?
+  %img{:src => "#{character.image(:small)}"}
+%em= character.user.screen_name
+= link_to 'delete', character, method: :delete

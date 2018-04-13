@@ -1,2 +1,27 @@
 module CampaignsHelper
+  def link_to_character_create(campaign)
+    if !has_character?(@campaign)
+        "<div class='small_box'>
+          #{link_to 'Create a Character!', new_campaign_pcharacter_path(@campaign) }
+        </div>".html_safe
+    end
+  end
+
+
+  def link_to_character_controls(character)
+    if owns_character?(character)
+      link_to 'delete', character, method: :delete
+    end
+  end
+
+private 
+
+  def owns_character?(character)
+    current_user.id == character.user_id
+  end
+
+  def has_character?(campaign_id)
+    current_user.pcharacters.where(campaign_id: campaign_id).present?
+  end
+
 end
