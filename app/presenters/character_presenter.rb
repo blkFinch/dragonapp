@@ -1,0 +1,3 @@
+class CharacterPresenter < BasePresenter
+
+end

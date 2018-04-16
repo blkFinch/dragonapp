@@ -1,9 +1,16 @@
+
 .col-sm-8
   - @campaign.pcharacters.each do | character |
     .feed_item
-      %h4= character.name
-      -if character.image.present?
-        %img{:src => "#{character.image(:small)}"}
+      %div{:id => "character_#{character.id}"}
+        %h4= character.name
+        :javascript
+          klass = #{character.dnd_class}
+          id = #{character.id}
+          callKlass(klass, id)
+      =link_to_character_image(character)
       %em= character.user.screen_name
       =link_to_character_controls(character)
+
+
         

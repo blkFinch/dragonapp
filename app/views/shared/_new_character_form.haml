@@ -2,7 +2,29 @@
   = form.label :name 
   %br
   = form.text_field :name
+  = form.label :class
+  = form.select :dnd_class, [["Barbarian", 1],["Bard", 2],["Cleric", 3],
+                          ["Druid",4], ["Fighter", 5], ["Monk", 6],
+                          ["Paladin", 7], ["Ranger", 8], ["Rogue", 9],
+                          ["Sorcerer", 10], ["Warlock", 11], ["Wizard", 12] ]
   %br
   = form.label :icon
   = form.file_field :image, class: 'form-control'
+
+  %br
+  = form.label :STR
+  = form.number_field :str, :max => 18, :min => 4 
+  = form.label :DEX
+  = form.number_field :dex, :max => 18, :min => 4 
+  = form.label :CON
+  = form.number_field :con, :max => 18, :min => 4 
+  %br
+  = form.label :WIS
+  = form.number_field :wis, :max => 18, :min => 4
+  = form.label :INT
+  = form.number_field :int, :max => 18, :min => 4 
+  = form.label :CHA
+  = form.number_field :cha, :max => 18, :min => 4
+  %br
+  %br 
   = form.submit "Create!", class: "btn btn-primary"

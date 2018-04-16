@@ -32,3 +32,17 @@ function callApi(type){
     }
   })
 }
+
+function callKlass(klass, id){
+  $.ajax({
+    type: 'GET',
+    url: 'http://www.dnd5eapi.co/api/classes/' + klass,
+    dataType: 'json',
+
+    success: function(data){
+      console.log(data);
+      $('#character_' + id).append(data.name);
+    }
+  })
+}
+

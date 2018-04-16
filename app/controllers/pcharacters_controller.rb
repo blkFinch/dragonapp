@@ -32,7 +32,8 @@ class PcharactersController < ApplicationController
 
   private 
     def character_params
-      params.require(:pcharacter).permit(:name)
+      params.require(:pcharacter).permit(:name, :dnd_class, :str, :dex,
+                                          :con, :int, :wis, :cha)
     end
 
 end

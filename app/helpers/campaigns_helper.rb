@@ -7,6 +7,13 @@ module CampaignsHelper
     end
   end
 
+  def link_to_character_image(character)
+    if character.image.present?
+      "<img src='#{character.image(:small)}'/>".html_safe
+    end
+  end
+
+  
 
   def link_to_character_controls(character)
     if owns_character?(character)
