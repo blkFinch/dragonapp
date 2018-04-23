@@ -1,0 +1,8 @@
+.modal#new_character_modal
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        .modal-title
+          %h2 New Character
+      .modal-body
+        =render partial: 'shared/new_character_form'

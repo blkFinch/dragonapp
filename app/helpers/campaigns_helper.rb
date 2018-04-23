@@ -2,7 +2,10 @@ module CampaignsHelper
   def link_to_character_create(campaign)
     if !has_character?(@campaign)
         "<div class='small_box'>
-          #{link_to 'Create a Character!', new_campaign_pcharacter_path(@campaign) }
+          <a data-toggle='modal' 
+          data-target='#new_character_modal'>
+          Create a New Character!
+          </button>
         </div>".html_safe
     end
   end

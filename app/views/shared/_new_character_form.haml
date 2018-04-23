@@ -2,6 +2,12 @@
   = form.label :name 
   %br
   = form.text_field :name
+  %br
+  = form.label :race
+  = form.select :dnd_race, [["Dwarf", 1],["Elf", 2],["Halfling", 3],
+                            ["Human", 4],["Dragonborn", 5],["Gnome",6],
+                            ["Half-Elf", 7],["Half-Orc", 8],["Tiefling",9] ]
+  %br
   = form.label :class
   = form.select :dnd_class, [["Barbarian", 1],["Bard", 2],["Cleric", 3],
                           ["Druid",4], ["Fighter", 5], ["Monk", 6],

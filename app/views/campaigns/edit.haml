@@ -7,6 +7,8 @@
   .row
     .col-sm-3
       #user_display
+        = link_to 'Campaign Home', campaign_path(@campaign)
+        %br
         %em PLAYERS:
         .active_players
           =render partial: 'campaigns/active_user', collection: @campaign.users, as: :user 

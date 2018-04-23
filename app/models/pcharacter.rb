@@ -11,6 +11,10 @@ class Pcharacter < ApplicationRecord
                                      "image/jpeg", "image/png", "image/gif"]
 
 
-  validates :user, presence: true 
-  validates :campaign, presence: true 
+  validates_presence_of :user, :campaign, :name, 
+                        :dnd_race, :dnd_class
+
+  validates_numericality_of :str, :dex, :con, 
+                            :wis, :int, :cha,  
+                            less_than: 25, greater_than: 0
 end

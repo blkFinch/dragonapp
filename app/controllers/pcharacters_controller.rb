@@ -19,6 +19,7 @@ class PcharactersController < ApplicationController
       redirect_to campaign_path(@campaign)
     else
       flash_error(@character)
+      redirect_to campaign_path(@campaign)
     end
   end
 
@@ -32,8 +33,8 @@ class PcharactersController < ApplicationController
 
   private 
     def character_params
-      params.require(:pcharacter).permit(:name, :dnd_class, :str, :dex,
-                                          :con, :int, :wis, :cha)
+      params.require(:pcharacter).permit(:name, :dnd_class, :dnd_race, :str, 
+                                          :dex, :con, :int, :wis, :cha)
     end
 
 end
