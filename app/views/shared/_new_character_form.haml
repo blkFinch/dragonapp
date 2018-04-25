@@ -2,6 +2,9 @@
   = form.label :name 
   %br
   = form.text_field :name
+  -if is_dm?(@campaign.id)
+    = form.select :user,
+       options_from_collection_for_select(@campaign.users, 'id', 'screen_name')
   %br
   = form.label :race
   = form.select :dnd_race, [["Dwarf", 1],["Elf", 2],["Halfling", 3],
