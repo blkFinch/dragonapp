@@ -1,14 +1,18 @@
 
-.col-sm-8
+.col-sm-3
   - @campaign.pcharacters.each do | character |
     .feed_item
       %div{:id => "character_#{character.id}"}
         %h4= character.name
         :javascript
+          race = #{character.dnd_race}
           klass = #{character.dnd_class}
           id = #{character.id}
+          callRace(race, id)
           callKlass(klass, id)
       =link_to_character_image(character)
+      =render "shared/character_stats", :locals =>{:character => character }
+      %br
       %em= character.user.screen_name
       
       %em=link_to_character_controls(character)

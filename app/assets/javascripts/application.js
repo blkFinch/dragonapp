@@ -41,7 +41,20 @@ function callKlass(klass, id){
 
     success: function(data){
       console.log(data);
-      $('#character_' + id).append(data.name);
+      $('#character_' + id).append(data.name+ " ");
+    }
+  })
+}
+
+function callRace(race, id){
+  $.ajax({
+    type: 'GET',
+    url: 'http://www.dnd5eapi.co/api/races/' + race,
+    dataType: 'json',
+
+    success: function(data){
+      console.log(data);
+      $('#character_' + id).append(data.name+" ");
     }
   })
 }

@@ -15,9 +15,7 @@ module CampaignsHelper
       "<img src='#{character.image(:small)}'/>".html_safe
     end
   end
-
   
-
   def link_to_character_controls(character)
     if owns_character?(character)
       link_to 'delete', character, method: :delete

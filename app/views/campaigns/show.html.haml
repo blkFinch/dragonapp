@@ -19,6 +19,7 @@
       
       =link_to_character_create(@campaign)
 
+  .row  
     -if @campaign.pcharacters.any?
       =render partial: 'campaigns/character_feed'
 
