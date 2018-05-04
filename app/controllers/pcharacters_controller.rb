@@ -5,6 +5,11 @@ class PcharactersController < ApplicationController
     @characters = @campaign.pcharacters.all
   end
 
+  def show
+    @campaign = Campaign.find(params[:campaign_id])
+    @character = @campaign.pcharacters.find(params[:id])
+  end
+
   def new
     @campaign = Campaign.find(params[:campaign_id])
   end

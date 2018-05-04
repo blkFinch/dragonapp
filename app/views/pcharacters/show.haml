@@ -1,0 +1,7 @@
+.header
+  %h1= @character.name
+.container-fluid
+  .row
+    .col-sm-4
+      .small_box
+        =render "shared/character_stats", :locals =>{:character => @character }
