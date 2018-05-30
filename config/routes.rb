@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'static_pages/home', to: "static_pages#home"
-  
+
   get '/login', to: 'static_pages#index'
   post   '/login',   to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -10,21 +10,22 @@ Rails.application.routes.draw do
 
 
 
-  resources :users do 
-   
+  resources :users do
+
   end
-    
-  resources :campaigns do 
+
+  resources :campaigns do
     member do
       patch :add_user
       get :search_user
       patch :remove_user
     end
 
-    resources :pcharacters 
+    resources :pcharacters
   end
 
   resources :pcharacters
+  resources :posts
 
 
   root "static_pages#index"
