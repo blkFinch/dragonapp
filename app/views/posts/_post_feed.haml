@@ -1,0 +1,6 @@
+- @campaign.posts.each do | post |
+  %div{:id => "post_#{post.id}"}
+    %h4= post.title
+    %p= post.body
+    %em= User.find(post.user_id).screen_name
+

@@ -1,5 +1,5 @@
 .header
-  %h1 
+  %h1
     =@campaign.title
 .container-fluid
   =render partial: 'shared/new_character_modal'
@@ -11,17 +11,22 @@
         %em USERS:
         .active_players
           - @campaign.users.each do |user|
-            =link_to user.screen_name, user_path(user) 
+            =link_to user.screen_name, user_path(user)
             |
         -if is_dm?(@campaign)
           %br
           =link_to 'DM Controls', edit_campaign_path(@campaign)
-      
-      =link_to_character_create(@campaign)
 
-  .row  
+      =link_to_character_create(@campaign)
+    .col-sm-6
+      -if @campaign.posts.any?
+        =render partial: 'posts/post_feed'
+    .col-sm-3.pull-left
+      %h4 New Post
+      %p new post form to go here
+  .row
     -if @campaign.pcharacters.any?
       =render partial: 'campaigns/character_feed'
 
-    
+
 

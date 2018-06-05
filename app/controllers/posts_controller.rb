@@ -9,4 +9,9 @@ class PostsController < ApplicationController
     @campaign = Campaign.find(params[:campaign_id])
   end
 
+  def destroy
+    @post.destroy
+    flash[:success] = "Deleted!"
+    redirect_to campaign_path(@campaign)
+
 end
