@@ -22,10 +22,10 @@ Rails.application.routes.draw do
     end
 
     resources :pcharacters
+    resources :posts
   end
 
   resources :pcharacters
-  resources :posts
 
 
   root "static_pages#index"
