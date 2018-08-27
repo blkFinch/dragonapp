@@ -42,6 +42,9 @@ gem 'paperclip'
 #for mailgun email app
 gem 'mailgun_rails'
 
+# adding react with webpack
+gem 'webpacker'
+gem 'react-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -64,7 +67,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do 
+group :test do
   gem 'factory_bot_rails',  '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'

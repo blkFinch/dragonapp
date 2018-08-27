@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   get 'static_pages/home', to: "static_pages#home"
+  get '/react',       to:      'react#home'
 
-  get '/login', to: 'static_pages#index'
+  get '/login',      to: 'static_pages#index'
   post   '/login',   to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  delete 'logout',   to: 'sessions#destroy'
 
-  get '/reference', to: 'reference#show'
+  get '/reference',   to: 'reference#show'
 
 
 
