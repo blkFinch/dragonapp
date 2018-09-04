@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-class HelloWold extends React.Component {
+class Howdy extends React.Component {
   render () {
     return (
       <h2>
@@ -11,4 +11,4 @@ class HelloWold extends React.Component {
   }
 }
 
-export default HelloWold
+export default Howdy

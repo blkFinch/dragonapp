@@ -6,31 +6,33 @@ class UsersController < ApplicationController
     if params[:search]
       @users = User.search(params[:search])
     end
+    render json: User.all
   end
 
   def new
-    @user = User.new 
+    @user = User.new
   end
 
   def show
     @user = User.find(params[:id])
+    render json: @user
   end
 
   def create
     @user = User.new(user_params)
-    @users = User.all 
+    @users = User.all
     @user.permission = 1;
     if @user.save
       flash[:success] = 'Welcome to Dragon Binder!'
       DragonMailer.with(user: @user).welcome_email.deliver_now
-      log_in @user 
+      log_in @user
       redirect_to user_path(@user)
     else
       flash_error(@user)
       render action: "new"
     end
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profile Updated!"
       redirect_to @user
     else
-      flash[:danger] = "Failed to create account :< #{@user.errors.full_messages}" 
+      flash[:danger] = "Failed to create account :< #{@user.errors.full_messages}"
       render 'edit'
     end
   end
@@ -52,7 +54,7 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
- 
+
 
   private
 
@@ -65,5 +67,5 @@ class UsersController < ApplicationController
       end
       params.require(:user).permit(allowed)
     end
-  
+
 end
