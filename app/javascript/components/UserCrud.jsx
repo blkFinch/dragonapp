@@ -17,8 +17,8 @@ class AllUsers extends React.Component{
     var users = this.state.users.map( (user) => {
       return(
         <div key={user.id}>
-          <b>user.screen_name</b>
-          <p>user.email</p>
+          <b>{user.screen_name}</b>
+          <p>{user.email}</p>
         </div>);
     })
 

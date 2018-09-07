@@ -6,7 +6,12 @@ class UsersController < ApplicationController
     if params[:search]
       @users = User.search(params[:search])
     end
-    render json: User.all
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @users
+      }
+    end
   end
 
   def new
@@ -15,7 +20,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @user
+      }
+    end
   end
 
   def create
@@ -30,6 +40,12 @@ class UsersController < ApplicationController
     else
       flash_error(@user)
       render action: "new"
+    end
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @user
+      }
     end
   end
 

@@ -1,8 +1,10 @@
 class CampaignsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :logged_in_user
   before_action  :is_owner, only:[:edit]
 
-  def index 
+  def index
+    render json: Campaign.all
   end
 
   def new
@@ -11,9 +13,9 @@ class CampaignsController < ApplicationController
 
   def create
 
-    @campaign = Campaign.new(campaign_params) 
+    @campaign = Campaign.new(campaign_params)
 
-    if @campaign.save 
+    if @campaign.save
       current_user.organizers.create(campaign_id: @campaign.id, dm: true)
       flash[:success] = 'Campaign created!'
       redirect_to @campaign
@@ -23,10 +25,14 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def destroy
+    @campaign = Campaign.find(params[:id])
+    @campaign.destroy
+  end
 
   def show
     @campaign = Campaign.find(params[:id])
-    @character = Pcharacter.new 
+    @character = Pcharacter.new
   end
 
   def edit
@@ -48,7 +54,7 @@ class CampaignsController < ApplicationController
   def search_user
     @campaign = Campaign.find(params[:id])
     @users = User.search(params[:search])
-    respond_to do |format| 
+    respond_to do |format|
       format.js { render template: "users/search"}
     end
   end
@@ -75,7 +81,7 @@ class CampaignsController < ApplicationController
 
 
 
-  private 
+  private
     def campaign_params
       params.require(:campaign).permit(:title, :description)
     end
@@ -86,6 +92,10 @@ class CampaignsController < ApplicationController
         flash[:danger]="access denied"
         redirect_to campaign_path(@campaign)
       end
+    end
+
+    def json_request?
+      request.format.symbol == :json
     end
 
 end

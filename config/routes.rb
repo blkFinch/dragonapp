@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/home', to: "static_pages#home"
   get '/react',       to:      'react#home'
+  get '/react/campaigns',       to:      'react#campaigns'
 
   get '/login',      to: 'static_pages#index'
   post   '/login',   to: 'sessions#create'

@@ -8,4 +8,5 @@ class Campaign < ApplicationRecord
                     uniqueness: true
 
   validates :description, presence: true
+
 end
