@@ -2,6 +2,7 @@ class Campaign < ApplicationRecord
   has_many :organizers
   has_many :users, :through => :organizers
   has_many :pcharacters
+  has_many :appointments
   has_many :posts
 
   validates :title, presence: true,

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'appointments/index'
+
   get 'static_pages/home', to: "static_pages#home"
   get '/react',       to:      'react#home'
   get '/react/campaigns',       to:      'react#campaigns'
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
       patch :remove_user
     end
 
+    resources :appointments
     resources :pcharacters
     resources :posts
   end

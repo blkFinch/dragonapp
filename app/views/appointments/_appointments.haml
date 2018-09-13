@@ -1,0 +1,6 @@
+#appointment_list
+  .list-group
+    - @appointments.each do |a|
+      .list-group-item
+        %b= a.title
+        %em= a.appt_time

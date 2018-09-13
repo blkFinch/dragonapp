@@ -1,0 +1,19 @@
+.header
+  %h1
+    = @campaign.title
+    Calender
+.container-fluid
+  .row
+    .col-sm-12
+      = react_component("Appointments")
+
+  .row
+    .col-sm-4
+      %h4 Make New Appointment
+      =form_for [@campaign, @appointment], remote: true do |f|
+        =f.text_field :title, placeholder: "Title"
+        =f.text_field :appt_time, placeholder: "Date mm/dd/yy"
+        =f.submit 'Make Appointment'
+    .col-sm-6
+      %h4 Appointments:
+      =render 'appointments'
