@@ -4,18 +4,15 @@
     Calender
 .container-fluid
   .row
-    .col-sm-12
-      = react_component("Appointments", appointments: @appointments)
+    = react_component( "Calender/CalenderMain", {appointments: @appointments})
 
-  .row
-    .col-sm-4
-      %h4 Make New Appointment w/ React
-      = react_component("AppointmentForm", campaign_id: @campaign.id)
-      %h4 Make New Appointment
-      =form_for [@campaign, @appointment], remote: true do |f|
-        =f.text_field :title, placeholder: "Title"
-        =f.text_field :appt_time, placeholder: "Date mm/dd/yy"
-        =f.submit 'Make Appointment'
-    .col-sm-6
-      %h4 Appointments:
-      =render 'appointments'
+  -# previously handled by js now handled by react
+  -# .row
+  -#   .col-sm-6
+  -#     %h4 Make New Appointment
+  -#     =form_for [@campaign, @appointment], remote: true do |f|
+  -#       =f.text_field :title, placeholder: "Title"
+  -#       =f.text_field :appt_time, placeholder: "Date mm/dd/yy"
+  -#       =f.submit 'Make Appointment'
+  -#     %h4 Appointments:
+  -#     =render 'appointments'

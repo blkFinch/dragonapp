@@ -1,14 +1,18 @@
 class AppointmentsController < ApplicationController
+
   def index
     @campaign = Campaign.find(params[:campaign_id])
-    @appointment = Appointment.new
-    @appointments = Appointment.order('appt_time ASC')
+    @appointments = @campaign.appointments.order('appt_time ASC')
   end
 
   def create
     @campaign = Campaign.find(params[:campaign_id])
     @appointment = @campaign.appointments.create(appointment_params)
-    @appointments = Appointment.order('appt_time ASC')
+    if @appointment.save
+      render json: @appointment
+    else
+      render json: @appointment.errors, status: :unprocessable_entity
+    end
   end
 
 private

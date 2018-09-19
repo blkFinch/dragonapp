@@ -25,7 +25,9 @@ Rails.application.routes.draw do
       patch :remove_user
     end
 
+    post '/appointments/create', to: 'appointments#create'
     resources :appointments
+
     resources :pcharacters
     resources :posts
   end

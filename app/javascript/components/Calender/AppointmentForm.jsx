@@ -5,8 +5,8 @@ class AppointmentForm extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      title: 'Placeholder Title',
-      appt_time: 'tommorow at 9am',
+      title: '',
+      appt_time: '',
       campaign_id: this.props.campaign_id
     };
 
@@ -21,7 +21,26 @@ class AppointmentForm extends React.Component{
   }
 
   handleSubmit(e){
-   console.log(`submitted!`)
+
+   // gets token from top of page
+   var token = document.getElementsByName('csrf-token')[0].content
+
+   let body = JSON.stringify({appointment:
+      {
+        title: this.state.title,
+        appt_time: this.state.appt_time,
+        campaign_id: this.state.campaign_id
+      }
+    })
+
+    fetch(`/campaigns/${this.state.campaign_id}/appointments/`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token
+      },
+      body: body
+    });
   }
 
   render(){
