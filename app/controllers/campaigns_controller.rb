@@ -18,6 +18,7 @@ class CampaignsController < ApplicationController
     if @campaign.save
       current_user.organizers.create(campaign_id: @campaign.id, dm: true)
       flash[:success] = 'Campaign created!'
+      render :nothing => true
       redirect_to @campaign
     else
       flash_error(@campaign)
@@ -31,6 +32,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    puts("show")
     @campaign = Campaign.find(params[:id])
     @character = Pcharacter.new
   end

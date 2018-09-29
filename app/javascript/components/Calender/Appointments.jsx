@@ -4,15 +4,10 @@ import Appointment from "./Appointment"
 
 class Appointments extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state= { appointments: this.props.appointments};
-  }
-
   render () {
     return (
       <ul class="list-group">
-        {this.state.appointments.map(function(appointment){
+        {this.props.appointments.map(function(appointment){
           return(
             <Appointment appointment={appointment} />
             )

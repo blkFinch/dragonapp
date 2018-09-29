@@ -76,9 +76,9 @@ class Body extends React.Component{
   }
 
   addNewCampaign(campaign){
-    this.setState({
-      campaigns: this.state.campaigns.concat(campaign)
-    })
+    // this.setState({
+    //   campaigns: this.state.campaigns.concat(campaign)
+    // })
   }
 
   render(){

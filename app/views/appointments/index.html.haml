@@ -4,7 +4,7 @@
     Calender
 .container-fluid
   .row
-    = react_component( "Calender/CalenderMain", {appointments: @appointments})
+    = react_component( "Calender/CalenderMain", {appointments: @appointments, campaign_id: @campaign.id})
 
   -# previously handled by js now handled by react
   -# .row
