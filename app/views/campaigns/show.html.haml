@@ -16,6 +16,7 @@
         -if is_dm?(@campaign)
           %br
           =link_to 'DM Controls', edit_campaign_path(@campaign)
+          =link_to 'Calender', campaign_appointments_path(@campaign)
 
       =link_to_character_create(@campaign)
     .col-sm-6

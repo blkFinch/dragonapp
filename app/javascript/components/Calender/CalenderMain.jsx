@@ -36,7 +36,7 @@ class CalenderMain extends React.Component{
       }
     })
 
-    fetch(`/campaigns/${this.state.campaign_id}/appointments/`,{
+    fetch(`/campaigns/${this.state.campaign_id}/appointments.json`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,6 +52,7 @@ class CalenderMain extends React.Component{
 
   // TODO: research React Addons Update
   addNewAppointment(appointment){
+    console.log("new appointemnt added!");
     // var appointments = React.addons.update(this.state.appointments, { $push: [appointments]});
   }
 
