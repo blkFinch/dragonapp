@@ -18,7 +18,6 @@ class CampaignsController < ApplicationController
     if @campaign.save
       current_user.organizers.create(campaign_id: @campaign.id, dm: true)
       flash[:success] = 'Campaign created!'
-      render :nothing => true
       redirect_to @campaign
     else
       flash_error(@campaign)
