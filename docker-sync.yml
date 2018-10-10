@@ -1,0 +1,10 @@
+version: '2'
+options:
+  verbose: true
+  compose-dev-file-path: 'docker-compose-sync.yml'
+syncs:
+  #IMPORTANT: ensure this name is unique and does not match your other application container name
+  web-sync: #tip: add -sync and you keep consistent names ala a convention
+    src: './'
+    watch_excludes: ['.*/.git', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.gitignore', '.DS_Store', 'node_modules', 'public/packs']
+    sync_excludes: ['.gitignore', '.git', 'tmp', '.DS_Store', 'node_modules', 'public/packs']

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - web-sync:/var/www/dragons:nocopy # will be mounted on /bear
+volumes:
+  web-sync:
+    external: true
