@@ -6,10 +6,10 @@ class Appointments extends React.Component {
 
   render () {
     return (
-      <ul class="list-group">
+      <ul className="list-group">
         {this.props.appointments.map(function(appointment){
           return(
-            <Appointment appointment={appointment} />
+            <Appointment appointment={appointment} key={appointment.id} />
             )
         })}
       </ul>
