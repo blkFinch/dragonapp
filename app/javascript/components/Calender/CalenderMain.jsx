@@ -2,6 +2,7 @@ import React from "react"
 import Proptypes from "prop-types"
 import Appointments from "./Appointments"
 import AppointmentForm from "./AppointmentForm"
+import update from 'immutability-helper'
 
 class CalenderMain extends React.Component{
 
@@ -46,6 +47,7 @@ class CalenderMain extends React.Component{
     }).then(
       (response) => { return response.json() }
     ).then(
+      
       (appointment) => { this.addNewAppointment(appointment) }
     );
   }
@@ -53,7 +55,8 @@ class CalenderMain extends React.Component{
   // TODO: research React Addons Update
   addNewAppointment(appointment){
     console.log("new appointemnt added!");
-    // var appointments = React.addons.update(this.state.appointments, { $push: [appointments]});
+    var appointments = update(this.state.appointments, { $push: [appointment]});
+    this.setState({appointments: appointments});
   }
 
   render(){
