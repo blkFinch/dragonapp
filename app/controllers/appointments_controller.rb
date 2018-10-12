@@ -15,6 +15,12 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def destroy
+    @appointment = Appointment.find(params[:id])
+    render json: @appointment
+    @appointment.destroy
+  end
+
 private
   def appointment_params
     params.require(:appointment).permit(:title, :appt_time)

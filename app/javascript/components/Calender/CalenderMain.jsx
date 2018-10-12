@@ -4,6 +4,7 @@ import Appointments from "./Appointments"
 import AppointmentForm from "./AppointmentForm"
 import update from 'immutability-helper'
 
+
 class CalenderMain extends React.Component{
 
   constructor(props){
@@ -17,7 +18,9 @@ class CalenderMain extends React.Component{
 
     this.onUserInput = this.onUserInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.addNewAppointment = this.addNewAppointment.bind(this);
+    this.deleteAppointment = this.deleteAppointment.bind(this);
   }
 
   onUserInput(e){
@@ -47,27 +50,57 @@ class CalenderMain extends React.Component{
     }).then(
       (response) => { return response.json() }
     ).then(
-      
       (appointment) => { this.addNewAppointment(appointment) }
     );
+  }
+
+  handleDelete(id){
+    console.log('handle delete hit');
+
+    var token = document.getElementsByName('csrf-token')[0].content
+
+    fetch(`/campaigns/${this.state.campaign_id}/appointments/${id}`,{
+      method: 'DELETE',
+      headers:{
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token
+      }
+    }).then(
+      this.deleteAppointment(id)
+    )
+  }
+
+  deleteAppointment(id){
+    this.setState({
+      appointments: this.state.appointments.filter((appointment) => appointment.id !== id )
+    })
   }
 
   // TODO: research React Addons Update
   addNewAppointment(appointment){
     console.log("new appointemnt added!");
     var appointments = update(this.state.appointments, { $push: [appointment]});
-    this.setState({appointments: appointments});
+    
+    this.setState({
+      appointments: appointments.sort(function(a,b){
+        return new Date(a.appt_time) - new Date(b.appt_time);
+      })
+    });
   }
 
   render(){
     return(
-      <div>
-        <AppointmentForm
-          title={this.state.title}
-          appt_time={this.state.appt_time}
-          onUserInput={this.onUserInput}
-          handleSubmit={this.handleSubmit} />
-        <Appointments appointments={this.state.appointments} />
+      <div className='container-fluid'>
+        <div className='col-sm-8'>
+          <AppointmentForm
+            title={this.state.title}
+            appt_time={this.state.appt_time}
+            onUserInput={this.onUserInput}
+            handleSubmit={this.handleSubmit} />
+          <Appointments 
+            appointments={this.state.appointments}
+            handleDelete={this.handleDelete} />
+        </div>
       </div>
       );
   }
