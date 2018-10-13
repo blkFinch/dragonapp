@@ -1,5 +1,6 @@
 import React from "react"
 import Proptypes from "prop-types"
+import WeeklyView from "./WeeklyView"
 import Appointments from "./Appointments"
 import AppointmentForm from "./AppointmentForm"
 import update from 'immutability-helper'
@@ -91,16 +92,19 @@ class CalenderMain extends React.Component{
   render(){
     return(
       <div className='container-fluid'>
-        <div className='col-sm-8'>
-          <AppointmentForm
-            title={this.state.title}
-            appt_time={this.state.appt_time}
-            onUserInput={this.onUserInput}
-            handleSubmit={this.handleSubmit} />
-          <Appointments 
-            appointments={this.state.appointments}
-            handleDelete={this.handleDelete} />
+        <div className="row">
+          <div className='col-sm-8'>
+            <AppointmentForm
+              title={this.state.title}
+              appt_time={this.state.appt_time}
+              onUserInput={this.onUserInput}
+              handleSubmit={this.handleSubmit} />
+            <Appointments 
+              appointments={this.state.appointments}
+              handleDelete={this.handleDelete} />
+          </div>
         </div>
+        <WeeklyView />
       </div>
       );
   }
