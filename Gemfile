@@ -34,7 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'responders'
 
 #bootstrap
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
 gem 'jquery-rails'

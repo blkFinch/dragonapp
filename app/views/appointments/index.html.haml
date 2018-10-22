@@ -3,6 +3,7 @@
     = @campaign.title
     Calender
     
+  = react_component( "Calender/WeeklyView", {appointments: @appointments, campaign_id: @campaign.id})
   = react_component( "Calender/CalenderMain", {appointments: @appointments, campaign_id: @campaign.id})
 
   -# previously handled by js now handled by react

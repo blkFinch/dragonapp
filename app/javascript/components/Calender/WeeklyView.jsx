@@ -5,10 +5,19 @@ import moment from 'moment'
 
 class WeeklyView extends React.Component{
 
+  constructor(props){
+    super(props);
+    this.state= {
+      today: moment(),
+      appointments: this.props.appointments,
+      campaign_id: this.props.campaign_id
+    };
+  }
+
   renderHeader(){
     return(
       <h3>
-        Week
+        Today is {this.state.today.format('MMM Do')}
       </h3>
     )
   }
@@ -18,22 +27,31 @@ class WeeklyView extends React.Component{
 
     for( let i = 0; i < 7; i++){
       let day = moment().day(i);
-      days.push(
-        <th scope='col' key={i}>
-          {moment(day).format(dateFormat)}
-        </th>
-      );
+
+      if(this.state.today.day() == i ) {
+        days.push(
+          <th className='table-header-highlight' scope='col' key={i}>
+            {moment(day).format(dateFormat)}
+          </th>
+        );
+      } else {
+        days.push(
+          <th scope='col' key={i}>
+            {moment(day).format(dateFormat)}
+          </th>
+        );
+      }
     }
 
     return(
         <tr className="days-row"><th scope='col'></th>{days}</tr>
     )
   }
-  renderSlots(){
+  renderHours(){
     // allow user to set hours of operation for calender view??
     // hour is in 24 format
-    const hourOpen = 7
-    const hourClose = 18
+    const hourOpen = 6
+    const hourClose = 19
     const hours = [];
 
     for( let i =hourOpen; i <= hourClose; i++){
@@ -41,24 +59,50 @@ class WeeklyView extends React.Component{
       hours.push(
         <tr>
           <th scope="row">{moment(hour).format('hA')}</th>
+          {this.renderCells()}
         </tr>
       )
     }
 
+    return hours
+  }
+
+  renderCells(){
+    const cells = []
+
+    for(let i = 0; i < 7; i++){
+      cells.push(
+        this.cell(i)
+      )
+    }
+
+    return cells
+  }
+
+  cell(day){
     return(
-      <div>{hours}</div>
+      <td>
+      </td>
     )
+  }
+
+  renderAppointments(){
+  
   }
   
   render(){
+
     return(
       <div>
+        {/* {this.renderAppointments()} */}
         {this.renderHeader()}
         <table className="table table-bordered">
           <thead className="thead-light">
             {this.renderDays()}
           </thead>
-          {this.renderSlots()}
+          <tbody>
+            {this.renderHours()}
+          </tbody>
         </table>
       </div>
     );

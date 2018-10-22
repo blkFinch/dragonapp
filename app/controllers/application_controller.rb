@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  before_action :set_time_zone 
   self.responder = ApplicationResponder
   respond_to :html
 
@@ -15,6 +16,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def set_time_zone
+      Time.zone = 'Mountain Time (US & Canada)'
+    end
 
     def logged_in_user
       unless logged_in?
