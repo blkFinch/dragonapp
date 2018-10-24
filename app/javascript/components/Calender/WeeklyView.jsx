@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import moment from 'moment'
+import AppointmentForm from "./AppointmentForm"
 
 
 class WeeklyView extends React.Component{
@@ -15,6 +16,7 @@ class WeeklyView extends React.Component{
   }
 
   renderHeader(){
+    console.log(this.state.appointments[0].appt_time);
     return(
       <h3>
         Today is {this.state.today.format('MMM Do')}
@@ -59,7 +61,7 @@ class WeeklyView extends React.Component{
       hours.push(
         <tr>
           <th scope="row">{moment(hour).format('hA')}</th>
-          {this.renderCells()}
+          {this.renderCells(hour)}
         </tr>
       )
     }
@@ -67,21 +69,27 @@ class WeeklyView extends React.Component{
     return hours
   }
 
-  renderCells(){
+  renderCells(hour){
     const cells = []
+    
 
     for(let i = 0; i < 7; i++){
+      var dayOfWeek = moment().startOf('week');
+      dayOfWeek.add(i, 'days')
+
       cells.push(
-        this.cell(i)
+        this.cell(dayOfWeek, hour)
       )
     }
 
     return cells
   }
 
-  cell(day){
+  cell(dayOfWeek, hour){
+
     return(
-      <td>
+      <td id= {moment(dayOfWeek) + moment(hour)}>  
+        {moment(dayOfWeek).format()}
       </td>
     )
   }
@@ -91,7 +99,6 @@ class WeeklyView extends React.Component{
   }
   
   render(){
-
     return(
       <div>
         {/* {this.renderAppointments()} */}
@@ -110,3 +117,25 @@ class WeeklyView extends React.Component{
 }
 
 export default WeeklyView
+
+class AppFormModal extends React.Component{
+  state={
+    show: false 
+    };
+
+  showModal(){
+    this.setState({show: true});
+  }
+
+  hideModal(){
+    this.setState({show: false});
+  }
+
+  render(){
+    return(
+      <div>
+        Appointment form here 
+      </div>
+    )
+  }
+}
