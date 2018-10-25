@@ -11,12 +11,13 @@ class WeeklyView extends React.Component{
     this.state= {
       today: moment(),
       appointments: this.props.appointments,
-      campaign_id: this.props.campaign_id
+      campaign_id: this.props.campaign_id,
+      _moment: moment().startOf('week')
     };
   }
 
   renderHeader(){
-    console.log(this.state.appointments[0].appt_time);
+    // const date_f = 'dddd, MMMM Do YYYY, h:mm:ss a'
     return(
       <h3>
         Today is {this.state.today.format('MMM Do')}
@@ -56,8 +57,12 @@ class WeeklyView extends React.Component{
     const hourClose = 19
     const hours = [];
 
+
     for( let i =hourOpen; i <= hourClose; i++){
-      let hour = moment().hour(i);
+
+      let hour = moment().startOf('week');
+      hour.add(i,'hours')
+
       hours.push(
         <tr>
           <th scope="row">{moment(hour).format('hA')}</th>
@@ -69,27 +74,26 @@ class WeeklyView extends React.Component{
     return hours
   }
 
+  //TODO: find way to add hour to dayOfWeek
   renderCells(hour){
     const cells = []
     
-
     for(let i = 0; i < 7; i++){
-      var dayOfWeek = moment().startOf('week');
-      dayOfWeek.add(i, 'days')
+      let _day = moment(hour).add(i, 'days')
 
       cells.push(
-        this.cell(dayOfWeek, hour)
+        this.cell(_day)
       )
     }
 
     return cells
   }
 
-  cell(dayOfWeek, hour){
-
+  cell(_day){
+    const date_f = 'dddd, MMMM Do YYYY, h:mm:ss a'
     return(
-      <td id= {moment(dayOfWeek) + moment(hour)}>  
-        {moment(dayOfWeek).format()}
+      <td id= {_day.toISOString()}>  
+        {_day.format(date_f)}
       </td>
     )
   }
@@ -117,25 +121,3 @@ class WeeklyView extends React.Component{
 }
 
 export default WeeklyView
-
-class AppFormModal extends React.Component{
-  state={
-    show: false 
-    };
-
-  showModal(){
-    this.setState({show: true});
-  }
-
-  hideModal(){
-    this.setState({show: false});
-  }
-
-  render(){
-    return(
-      <div>
-        Appointment form here 
-      </div>
-    )
-  }
-}
