@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import moment from 'moment'
+import update from 'immutability-helper'
 import AppFormModal from './AppFormModal'
 import Appointment from "./Appointment";
 
@@ -13,23 +14,99 @@ class WeeklyView extends React.Component{
       modal: false,
       dateSelected: moment(),
       today: moment(),
+      _moment: moment().startOf('week'),
       appointments: this.props.appointments,
       campaign_id: this.props.campaign_id,
-      _moment: moment().startOf('week')
+      title: '',
+      appt_time: ''
     };
 
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.onClickCell = this.onClickCell.bind(this);
     this.setDate = this.setDate.bind(this);
+
+    //appointments form methods
+    this.onUserInput = this.onUserInput.bind(this);
+    this.setApptTime = this.setApptTime.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.addNewAppointment = this.addNewAppointment.bind(this);
+    this.deleteAppointment = this.deleteAppointment.bind(this);
   }
 
-  logToConsole(){
-    console.log("this  is a test function");
+  setApptTime(e){
+    console.log(e._d);
+    this.setState({'appt_time': e._d});
+  }
+
+  onUserInput(e){
+    console.log(e);
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e){
+
+   // gets token from top of page
+   var token = document.getElementsByName('csrf-token')[0].content
+
+   let body = JSON.stringify({appointment:
+      {
+        title: this.state.title,
+        appt_time: this.state.appt_time,
+        campaign_id: this.state.campaign_id
+      }
+    })
+
+    fetch(`/campaigns/${this.state.campaign_id}/appointments.json`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token
+      },
+      body: body
+    }).then(
+      (response) => { return response.json() }
+    ).then(
+      (appointment) => { 
+        this.hideModal()
+        this.addNewAppointment(appointment) }
+    );
+  }
+
+  handleDelete(id){
+    console.log('handle delete hit');
+
+    var token = document.getElementsByName('csrf-token')[0].content
+
+    fetch(`/campaigns/${this.state.campaign_id}/appointments/${id}`,{
+      method: 'DELETE',
+      headers:{
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token
+      }
+    }).then(
+      this.deleteAppointment(id)
+    )
+  }
+
+  deleteAppointment(id){
+    this.setState({
+      appointments: this.state.appointments.filter((appointment) => appointment.id !== id )
+    })
+  }
+
+  // TODO: research React Addons Update
+  addNewAppointment(appointment){
+    console.log("new appointemnt added!");
+    var appointments = update(this.state.appointments, { $push: [appointment]});
+    this.setState({ appointments: appointments })
+    {this.renderHours()}
   }
 
   onClickCell(date){
     this.setDate(date);
+    this.setState({'appt_time': date._d});
     this.showModal();
   }
   setDate(date){
@@ -89,10 +166,8 @@ class WeeklyView extends React.Component{
 
 
     for( let i =hourOpen; i <= hourClose; i++){
-
       let hour = moment().startOf('week');
       hour.add(i,'hours')
-
       hours.push(
         <tr>
           <th scope="row">{moment(hour).format('hA')}</th>
@@ -123,7 +198,7 @@ class WeeklyView extends React.Component{
     return(
       <td id= {_day.toISOString() } onClick={() => this.onClickCell(_day)}> 
         {this.mapApps(_day.toISOString())} 
-       
+
       </td>
     )
   }
@@ -141,12 +216,16 @@ class WeeklyView extends React.Component{
   render(){
     return(
       <div>
-        {this.logToConsole()}
-       
         {this.renderHeader()}
-
-        <AppFormModal show={this.state.modal} handleClose={this.hideModal} date={this.state.dateSelected} />
-
+        <AppFormModal 
+              show={this.state.modal} 
+              handleClose={this.hideModal} 
+              date={this.state.dateSelected}
+              title={this.state.title}
+              appt_time={this.state.appt_time}
+              onUserInput={this.onUserInput}
+              handleSubmit={this.handleSubmit}
+              setApptTime={this.setApptTime}/>
         <table className="table table-bordered">
           <thead className="thead-light">
             {this.renderDays()}
