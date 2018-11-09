@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import moment from 'moment'
-import AppointmentForm from "./AppointmentForm"
+import AppFormModal from './AppFormModal'
+import Appointment from "./Appointment";
 
 
 class WeeklyView extends React.Component{
@@ -9,11 +10,40 @@ class WeeklyView extends React.Component{
   constructor(props){
     super(props);
     this.state= {
+      modal: false,
+      dateSelected: moment(),
       today: moment(),
       appointments: this.props.appointments,
       campaign_id: this.props.campaign_id,
       _moment: moment().startOf('week')
     };
+
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.onClickCell = this.onClickCell.bind(this);
+    this.setDate = this.setDate.bind(this);
+  }
+
+  logToConsole(){
+    console.log("this  is a test function");
+  }
+
+  onClickCell(date){
+    this.setDate(date);
+    this.showModal();
+  }
+  setDate(date){
+    this.setState({dateSelected: date});
+  }
+
+  showModal(){
+    console.log("modal show");
+    this.setState({modal: true});
+  }
+
+  hideModal(){
+    console.log("modal show");
+    this.setState({modal: false});
   }
 
   renderHeader(){
@@ -73,8 +103,7 @@ class WeeklyView extends React.Component{
 
     return hours
   }
-
-  //TODO: find way to add hour to dayOfWeek
+  
   renderCells(hour){
     const cells = []
     
@@ -92,21 +121,32 @@ class WeeklyView extends React.Component{
   cell(_day){
     const date_f = 'dddd, MMMM Do YYYY, h:mm:ss a'
     return(
-      <td id= {_day.toISOString()}>  
-        {_day.format(date_f)}
+      <td id= {_day.toISOString() } onClick={() => this.onClickCell(_day)}> 
+        {this.mapApps(_day.toISOString())} 
+       
       </td>
     )
   }
-
-  renderAppointments(){
   
+  mapApps(id){
+    for(let appointment of this.state.appointments){
+      if(moment(appointment.appt_time).toISOString() == id){
+        return(
+          <p>{appointment.title}</p>
+        )
+      }
+    }
   }
-  
+
   render(){
     return(
       <div>
-        {/* {this.renderAppointments()} */}
+        {this.logToConsole()}
+       
         {this.renderHeader()}
+
+        <AppFormModal show={this.state.modal} handleClose={this.hideModal} date={this.state.dateSelected} />
+
         <table className="table table-bordered">
           <thead className="thead-light">
             {this.renderDays()}

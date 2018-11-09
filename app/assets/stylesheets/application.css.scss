@@ -93,6 +93,23 @@
   background-color: aquamarine;
 }
 
+.modal{
+  position: fixed;
+  top: 30%;
+  left: 20%;
+  width: 50%;
+  height: 50%;
+  background: #C6D1DE;
+}
+
+.display-block{
+  display: block;
+}
+
+.display-none{
+  display: none;
+}
+
 // react-datetime styling
 .rdt {
   position: relative;
